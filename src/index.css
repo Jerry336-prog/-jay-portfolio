@@ -6,7 +6,7 @@
   /* Light Theme */
   --bg-primary: #000000;
   --bg-secondary: #ffffff;
-   --bg-main: url(../light bg.png);
+   --bg-main: url(../light-bg.png);
   --bg-alt: rgba(128, 128, 128, 0.268);
   /* --glass-bg: rgba(255, 255, 255, 0.248); */
   /* --glass-border: rgba(255, 255, 255, 0.3); */
@@ -28,7 +28,7 @@
 body.dark {
  --bg-primary: #ffffff;
   --bg-secondary: #000000;
-  --bg-main: url(../dark bg.jpg);
+  --bg-main: url(../dark-bg.jpg);
   /* --bg-alt: #1e1e2e; */
   /* --glass-bg: rgba(30, 30, 46, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1); */
