@@ -7,6 +7,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [projectName, setProjectName] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(null);
 
@@ -23,6 +24,7 @@ export default function Contact() {
     setStatus("success");
     setName("");
     setEmail("");
+    setProjectName("");
     setMessage("");
 
     setTimeout(() => setStatus(null), 3500);
@@ -31,26 +33,26 @@ export default function Contact() {
   const contacts = [
     {
       label: "Email",
-      value: "emmann.dev@gmail.com",
-      href: "mailto:emmann.dev@gmail.com",
+      value: "chinedujeremiah723@gmail.com",
+      href: "mailto:chinedujeremiah723@gmail.com",
       icon: <CiMail size={22} />,
     },
     {
       label: "GitHub",
-      value: "@Abiola-Emmanuel",
-      href: "https://github.com/Abiola-Emmanuel",
+      value: "@Jerry336-prog",
+      href: "https://github.com/Jerry336-prog",
       icon: <FaGithub size={22} />,
     },
     {
       label: "LinkedIn",
-      value: "in/emmanuel-abiola",
-      href: "https://linkedin.com/in/emmanuel-abiola",
+      value: "in/chinedu-jeremiah",
+      href: "https://www.linkedin.com/in/chinedu-jeremiah-22a10428b",
       icon: <GrLinkedin size={22} />,
     },
     {
       label: "Twitter",
-      value: '@console.log("Emman")',
-      href: "https://x.com/consolelogEmman",
+      value: '@Jerry.dev',
+      href: "https://x.com/jerrydev5803701",
       icon: <FaSquareXTwitter size={22} />,
     },
   ];
@@ -86,8 +88,9 @@ export default function Contact() {
                     className="
                       flex items-center gap-4
                       rounded-xl border
-                      border-gray-300 dark:border-gray-800
-                      bg-white dark:bg-gray-900
+                      
+                      bg-transparent
+                      border-gray-300 dark:border-gray-700
                       p-5
                       transition-all
                       hover:-translate-y-1
@@ -107,10 +110,10 @@ export default function Contact() {
 
                     {/* Text */}
                     <div>
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      <p className="text-sm font-semibold text-[var(--text-primary)]">
                         {item.label}
                       </p>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <p className="text-gray-800 text-[12px] dark:text-gray-600">
                         {item.value}
                       </p>
                     </div>
@@ -161,10 +164,23 @@ export default function Contact() {
               />
             </div>
 
+             {/* Project Name */}
+            <div className="mb-4">
+              <label className="block text-sm mb-2 text-[var(--text-secondary)]">
+                project Name
+              </label>
+              <input
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+                className="w-full px-3 py-2 rounded bg-transparent border border-gray-400 focus:border-[var(--bg-secondary)] outline-none"
+                placeholder="Your project name"
+              />
+            </div>
+
             {/* Message */}
             <div className="mb-4">
               <label className="block text-sm mb-2 text-[var(--text-secondary)]">
-                Message
+                Description
               </label>
               <textarea
                 rows={6}
