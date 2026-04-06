@@ -58,17 +58,17 @@ const Home = () => {
             <div className="flex gap-4 pt-2">
 
               <a href="https://github.com/Jerry336-prog" target="_blank"
-                className="p-3 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
+                className="p-3 rounded-full bg-[var(--bg-alt)] hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
                 <FaGithub />
               </a>
 
               <a href="https://x.com/jerrydev5803701" target="_blank"
-                className="p-3 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
+                className="p-3 rounded-full bg-[var(--bg-alt)] hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
                 <FaTwitter />
               </a>
 
               <a href="https://www.linkedin.com/in/chinedu-jeremiah-22a10428b" target="_blank"
-                className="p-3 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
+                className="p-3 rounded-full bg-[var(--bg-alt)] hover:bg-black/20 dark:hover:bg-green-600/20 hover:scale-110 transition">
                 <FaLinkedin />
               </a>
 

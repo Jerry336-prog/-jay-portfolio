@@ -26,7 +26,7 @@ function Header() {
   }
 
   return (
-    <div className="h-[70px] bg-[transparent] backdrop-blur-md sticky top-0 z-50 justify-center">
+    <div className="h-[70px] bg-[var(--bg-alt)] backdrop-blur-md sticky top-0 z-50 justify-center">
       <section className="w-full h-[70px] duration-500 bg-[transparent] text-[var(--text)] max-w-[full] flex items-center px-6 py-4 ">
         <h1 className="font-bold text-4xl">Jerry.dev</h1>
         <div className=" bg-[var(--bg-primary)] lg:ml-[400px] duration-500 p-1 rounded-full gap-2 hidden md:block  header">
