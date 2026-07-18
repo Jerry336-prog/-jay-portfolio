@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import { GrLinkedin } from "react-icons/gr";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import Button from "../Components/Button";
+import Toast from "../Components/Toast";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -10,6 +13,9 @@ export default function Contact() {
   const [projectName, setProjectName] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
 
   const validateEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 
@@ -18,16 +24,25 @@ export default function Contact() {
 
     if (!name.trim() || !validateEmail(email) || !message.trim()) {
       setStatus("error");
+      setToastMessage("Please fill in all required fields with a valid email.");
+      setToastType("error");
+      setShowToast(true);
       return;
     }
 
     setStatus("success");
+    setToastMessage("Thanks! Your message has been sent successfully.");
+    setToastType("success");
+    setShowToast(true);
+
     setName("");
     setEmail("");
     setProjectName("");
     setMessage("");
 
-    setTimeout(() => setStatus(null), 3500);
+    setTimeout(() => {
+      setStatus(null);
+    }, 3500);
   }
 
   const contacts = [
@@ -35,182 +50,223 @@ export default function Contact() {
       label: "Email",
       value: "chinedujeremiah723@gmail.com",
       href: "mailto:chinedujeremiah723@gmail.com",
-      icon: <CiMail size={22} />,
+      icon: <CiMail size={22} className="text-emerald-500" />,
     },
     {
       label: "GitHub",
       value: "@Jerry336-prog",
       href: "https://github.com/Jerry336-prog",
-      icon: <FaGithub size={22} />,
+      icon: <FaGithub size={22} className="text-emerald-500" />,
     },
     {
       label: "LinkedIn",
       value: "in/chinedu-jeremiah",
       href: "https://www.linkedin.com/in/chinedu-jeremiah-22a10428b",
-      icon: <GrLinkedin size={22} />,
+      icon: <GrLinkedin size={22} className="text-emerald-500" />,
     },
     {
       label: "Twitter",
-      value: '@Jerry.dev',
+      value: "@Jerry.dev",
       href: "https://x.com/jerrydev5803701",
-      icon: <FaSquareXTwitter size={22} />,
+      icon: <FaSquareXTwitter size={22} className="text-emerald-500" />,
     },
   ];
 
   return (
-    <section className="min-h-screen bg-[var(--bg-main)] text-[var(--text-primary)] py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <header className="text-center mb-12">
-          <h1 className="text-3xl lg:text-6xl font-semibold">
-            Let’s work together
-          </h1>
-          <p className="mt-4 text-md text-[var(--text-secondary)]">
-            Have a question or want to work together? Send a message.
-          </p>
+    <section className="relative min-h-screen pt-12 pb-24 overflow-hidden">
+      {/* Background radial flares */}
+      <div className="absolute top-1/4 left-[-10%] w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-[-10%] w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        
+        {/* ================= HEADER ================= */}
+        <header className="text-center max-w-2xl mx-auto mb-20 space-y-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white"
+          >
+            Let’s Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500">Together</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-600 dark:text-gray-400 font-light"
+          >
+            Have a project in mind or want to collaborate? Fill out the form or reach out directly.
+          </motion.p>
         </header>
 
-        <div className="grid gap-10 md:grid-cols-2 items-start">
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <div className="rounded-lg p-6 bg-[var(--bg-alt)] backdrop-blur-md">
-              <h2 className="text-lg font-semibold mb-6">
-                Contact
+        {/* ================= CONTENT GRID ================= */}
+        <div className="grid gap-12 lg:grid-cols-12 max-w-6xl mx-auto items-start">
+          
+          {/* LEFT SIDE: CONTACT DETAILS */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="rounded-2xl p-8 glass-panel border border-black/10 dark:border-white/10 shadow-lg">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
+                Direct Channels
               </h2>
 
               <div className="space-y-4">
                 {contacts.map((item, index) => (
-                  <a
+                  <motion.a
                     key={index}
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="
-                      flex items-center gap-4
-                      rounded-xl border
-                      
-                      bg-transparent
-                      border-gray-300 dark:border-gray-700
-                      p-5
-                      transition-all
-                      hover:-translate-y-1
-                      hover:shadow-md
-                    "
+                    whileHover={{ y: -3, scale: 1.01 }}
+                    className="flex items-center gap-4 rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5 p-4 transition-all duration-300 hover:border-emerald-500/30"
                   >
-                    {/* Icon */}
-                    <div className="
-                      flex items-center justify-center
-                      w-12 h-12
-                      rounded-full
-                      bg-gray-100 dark:bg-gray-800
-                      text-gray-800 dark:text-gray-200
-                    ">
+                    {/* Icon frame */}
+                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 text-gray-800 dark:text-gray-200">
                       {item.icon}
                     </div>
 
-                    {/* Text */}
+                    {/* Meta text */}
                     <div>
-                      <p className="text-sm font-semibold text-[var(--text-primary)]">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                         {item.label}
                       </p>
-                      <p className="text-gray-800 text-[12px] dark:text-gray-600">
+                      <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 mt-0.5">
                         {item.value}
                       </p>
                     </div>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-lg p-6 bg-[var(--bg-alt)] backdrop-blur-md">
-              <h3 className="text-sm font-medium">
-                Availability
+            {/* Availability Widget */}
+            <div className="rounded-2xl p-6 glass-panel border border-black/10 dark:border-white/10 shadow-md flex items-start gap-4">
+              <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20">
+                <span className="pulse-dot" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white">
+                  Availability & Location
+                </h3>
+                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                  Open for freelance contracts, full-time positions, and remote work. Based globally, working on GMT+1.
+                </p>
+              </div>
+            </div>
+
+            {/* Response Time Widget */}
+            <div className="rounded-2xl p-6 glass-panel border border-black/10 dark:border-white/10 shadow-md">
+              <h3 className="text-sm font-bold text-gray-900 dark:text-white">
+                Expected Reply Time
               </h3>
-              <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                Open to freelance and contract work.
+              <p className="mt-1 text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                I typically review all incoming developer inquiries and respond within <span className="text-emerald-500 font-semibold">24 hours</span>.
               </p>
             </div>
           </div>
 
-          {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="rounded-lg p-6 bg-[var(--bg-alt)] backdrop-blur-md"
-          >
-            {/* Name */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-[var(--text-secondary)]">
-                Name
-              </label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 rounded bg-transparent border border-gray-400 focus:border-[var(--bg-secondary)] outline-none"
-                placeholder="Your name"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-[var(--text-secondary)]">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 rounded bg-transparent border border-gray-400 focus:border-[var(--bg-secondary)] outline-none"
-                placeholder="you@example.com"
-              />
-            </div>
-
-             {/* Project Name */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-[var(--text-secondary)]">
-                project Name
-              </label>
-              <input
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-                className="w-full px-3 py-2 rounded bg-transparent border border-gray-400 focus:border-[var(--bg-secondary)] outline-none"
-                placeholder="Your project name"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-[var(--text-secondary)]">
-                Description
-              </label>
-              <textarea
-                rows={6}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-3 py-2 rounded bg-transparent border border-gray-400 focus:border-[var(--bg-secondary)] outline-none"
-                placeholder="Tell me about your project..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="px-5 py-2 rounded bg-[var(--bg-secondary)] font-medium hover:opacity-90 transition"
+          {/* RIGHT SIDE: GLASS FORM */}
+          <div className="lg:col-span-7">
+            <motion.form
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              onSubmit={handleSubmit}
+              className="rounded-2xl p-8 glass-panel border border-black/10 dark:border-white/10 shadow-lg space-y-6"
             >
-              Send message
-            </button>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                Send a Message
+              </h2>
 
-            {status === "success" && (
-              <p className="mt-4 text-sm text-green-400">
-                Thanks — your message was sent (simulated).
-              </p>
-            )}
+              {/* Name */}
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  Your Name <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 outline-none text-sm text-gray-800 dark:text-gray-200 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+                  placeholder="e.g. John Doe"
+                />
+              </div>
 
-            {status === "error" && (
-              <p className="mt-4 text-sm text-rose-400">
-                Please fill all fields with a valid email.
-              </p>
-            )}
-          </form>
+              {/* Email */}
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  Email Address <span className="text-rose-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 outline-none text-sm text-gray-800 dark:text-gray-200 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              {/* Project Name */}
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  Project / Topic Name
+                </label>
+                <input
+                  type="text"
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 outline-none text-sm text-gray-800 dark:text-gray-200 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300"
+                  placeholder="e.g. E-Commerce Redesign"
+                />
+              </div>
+
+              {/* Message */}
+              <div className="space-y-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                  Project Description / Message <span className="text-rose-500">*</span>
+                </label>
+                <textarea
+                  rows={5}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 outline-none text-sm text-gray-800 dark:text-gray-200 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-300 resize-none"
+                  placeholder="Describe your project requirements, scope, or questions..."
+                />
+              </div>
+
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full py-3.5 shadow-lg shadow-emerald-500/20"
+              >
+                Send Message
+              </Button>
+
+              {/* Inline alerts for accessibility */}
+              {status === "success" && (
+                <p className="text-center text-xs font-medium text-emerald-500 bg-emerald-500/10 py-2.5 rounded-lg border border-emerald-500/20">
+                  Your message was sent successfully!
+                </p>
+              )}
+
+              {status === "error" && (
+                <p className="text-center text-xs font-medium text-rose-500 bg-rose-500/10 py-2.5 rounded-lg border border-rose-500/20">
+                  Please check form inputs and try again.
+                </p>
+              )}
+            </motion.form>
+          </div>
         </div>
+
+        {/* Global Toast Alert */}
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          isVisible={showToast}
+          onClose={() => setShowToast(false)}
+        />
       </div>
     </section>
   );
