@@ -6,6 +6,7 @@ import HomePage from "./UI/Home/Home_page";
 import AboutPage from "./UI/About/About_page";
 import ProjectPage from "./UI/Project/Project_page";
 import ContactPage from "./UI/Contact/Contact_page";
+import CertificatePage from "./UI/Certificate/Certificate_page";
 import Login from "./UI/Admin/Login";
 import Dashboard from "./UI/Admin/Dashboard";
 import ProtectedRoute from "./UI/ProtectedRoute";
@@ -41,6 +42,13 @@ function App() {
           <>
           <Header />
           <ContactPage />
+          <Footer />
+          </>
+        } />
+        <Route path="/certificates" element={
+          <>
+          <Header />
+          <CertificatePage />
           <Footer />
           </>
         } />

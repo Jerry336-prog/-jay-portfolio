@@ -88,6 +88,20 @@ function PageLoader({ isVisible }) {
     </div>
   );
 
+  const renderCertificateSkeleton = () => (
+    <div className="w-full max-w-7xl mx-auto px-6 md:px-12 mt-12 md:mt-24">
+      <div className="text-center max-w-2xl mx-auto mb-20 space-y-4 flex flex-col items-center">
+        <div className="w-80 h-12 md:h-16 bg-black/10 dark:bg-white/10 rounded-2xl"></div>
+        <div className="w-96 h-5 bg-black/5 dark:bg-white/5 rounded-xl"></div>
+      </div>
+      <div className="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        {[1, 2, 3, 4].map(i => (
+          <div key={i} className="h-64 rounded-2xl bg-black/10 dark:bg-white/10 shadow-lg border border-black/5 dark:border-white/5"></div>
+        ))}
+      </div>
+    </div>
+  );
+
   const renderSkeleton = () => {
     switch (path) {
       case "/":
@@ -98,6 +112,8 @@ function PageLoader({ isVisible }) {
         return renderProjectsSkeleton();
       case "/contact":
         return renderContactSkeleton();
+      case "/certificates":
+        return renderCertificateSkeleton();
       default:
         return renderHomeSkeleton();
     }

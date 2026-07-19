@@ -45,6 +45,7 @@ function Header() {
     { to: "/", label: "Home" },
     { to: "/projects", label: "Projects" },
     { to: "/about", label: "About" },
+    { to: "/certificates", label: "Certificates" },
     { to: "/contact", label: "Contact" },
   ];
 

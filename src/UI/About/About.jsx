@@ -53,17 +53,33 @@ function About() {
     {
       title: "Frontend Craft",
       icon: <FaCode className="text-sky-400" />,
-      skills: ["React.js", "JavaScript", "HTML5 & CSS3", "Tailwind CSS v4", "Vite"]
+      skills: [
+        "React.js, Next.js & Hooks", 
+        "JavaScript & TypeScript", 
+        "HTML5 & CSS3", 
+        "Tailwind CSS v4", 
+        "Responsive Web Design"
+      ]
     },
     {
       title: "Backend & Systems",
       icon: <FaDatabase className="text-emerald-400" />,
-      skills: ["Firebase Firestore", "Firebase Authentication", "Cloudinary SDK", "REST APIs"]
+      skills: [
+        "Firebase Firestore & Auth", 
+        "RESTful APIs & Axios", 
+        "Cloudinary SDK", 
+        "Redux Toolkit / Context API"
+      ]
     },
     {
       title: "Environment & Tools",
       icon: <FaWrench className="text-amber-400" />,
-      skills: ["Git & GitHub", "Vercel Deployment", "NPM & Node.js", "Chrome DevTools"]
+      skills: [
+        "Git & GitHub", 
+        "Framer Motion, GSAP & AOS", 
+        "Vite, NPM & Node.js", 
+        "Vercel & Chrome DevTools"
+      ]
     }
   ];
 
@@ -126,11 +142,11 @@ function About() {
                   <p><span className="text-emerald-400">const</span> developer = <span className="text-purple-400">{"{"}</span></p>
                   <p className="pl-4">name: <span className="text-teal-300">"Jerry"</span>,</p>
                   <p className="pl-4">role: <span className="text-teal-300">"Frontend Architect"</span>,</p>
-                  <p className="pl-4">experience: <span className="text-amber-400">"2+ Years"</span>,</p>
+                  <p className="pl-4">experience: <span className="text-amber-400">"4+ Years"</span>,</p>
                   <p className="pl-4">focus: <span className="text-teal-300">"Clean UI, Scaling SaaS products"</span>,</p>
                   <p className="pl-4">
                     stack: <span className="text-purple-300">[</span>
-                    <span className="text-teal-300">"React"</span>, <span className="text-teal-300">"Tailwind"</span>, <span className="text-teal-300">"Firebase"</span>
+                    <span className="text-teal-300">"React"</span>, <span className="text-teal-300">"Next.js"</span>, <span className="text-teal-300">"TypeScript"</span>, <span className="text-teal-300">"Tailwind"</span>
                     <span className="text-purple-300">]</span>,
                   </p>
                   <p className="pl-4">motivation: <span className="text-teal-300">"Building real-world usability"</span>,</p>
