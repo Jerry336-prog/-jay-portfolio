@@ -91,7 +91,7 @@ const Home = () => {
 
             {/* Resume CTA */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-2">
-              <a href="/resume.pdf" download className="no-underline">
+              <a href="/cv.pdf" download className="no-underline">
                 <Button variant="primary" className="px-8 py-3.5 shadow-lg shadow-emerald-500/20">
                   Download Resume
                 </Button>

@@ -167,7 +167,7 @@ function About() {
               {[
                 { count: "10+", label: "Projects Built" },
                 { count: "8+", label: "Technologies" },
-                { count: "2+", label: "Years Exp" },
+                { count: "4+", label: "Years Exp" },
                 { count: "500+", label: "GitHub Commits" }
               ].map((stat, i) => (
                 <div key={i} className="p-4 rounded-xl glass-panel border border-black/5 dark:border-white/5 text-center">
