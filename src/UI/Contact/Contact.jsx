@@ -30,8 +30,28 @@ export default function Contact() {
       return;
     }
 
+    const phoneNumber = "+2348036338604"; // Replace with your number, e.g., "2348123456789" (No '+' sign)
+    const textMessage = `*NEW PORTFOLIO INQUIRY*
+-----------------------------------------
+
+*CONTACT DETAILS*
+• *Name:* ${name}
+• *Email:* ${email}
+
+*PROJECT INFO*
+• *Project Name:* ${projectName || 'Not specified'}
+
+*MESSAGE*
+${message}
+
+-----------------------------------------
+_Sent via your portfolio website_`;
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(textMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
     setStatus("success");
-    setToastMessage("Thanks! Your message has been sent successfully.");
+    setToastMessage("Opening WhatsApp to send your message...");
     setToastType("success");
     setShowToast(true);
 
