@@ -21,6 +21,13 @@ function Certificate() {
   // Replace 'image' properties with actual paths once you upload your certificate images to the public folder
   const certificates = [
     {
+      title: "micro1 AI Interview",
+      issuer: "micro1",
+      date: "July 25th, 2026",
+      description: "A candidate portal that lets remote job seekers and contractors track their application statuses in real-time, view AI-powered interview results, and access community links.",
+      image: "/Micro1 certificate.jpg"
+    },
+    {
       title: "Advanced React",
       issuer: "Meta / Coursera",
       date: "2019",
