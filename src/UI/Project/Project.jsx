@@ -32,21 +32,22 @@ function Project() {
     fetchProjects();
   }, []);
 
-  const filterTabs = ["All", "Featured", "React", "Firebase", "Tailwind"];
+  const filterTabs = ["All", "Featured", "Full-Stack", "React", "Node.js", "Firebase", "Tailwind"];
 
   // Filter and search logic
   const filteredProjects = projects.filter((project) => {
+    const stackList = Array.isArray(project.stack) ? project.stack : [];
     const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.stack.some((tech) =>
+      project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      stackList.some((tech) =>
         tech.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
     const matchesCategory =
       activeFilter === "All" ||
       (activeFilter === "Featured" && project.featured) ||
-      project.stack.some(
+      stackList.some(
         (tech) => tech.toLowerCase().trim() === activeFilter.toLowerCase().trim()
       );
 

@@ -51,34 +51,37 @@ function About() {
 
   const skillGroups = [
     {
-      title: "Frontend Craft",
+      title: "Frontend Engineering",
       icon: <FaCode className="text-sky-400" />,
       skills: [
-        "React.js, Next.js & Hooks", 
+        "React.js & Next.js", 
         "JavaScript & TypeScript", 
         "HTML5 & CSS3", 
         "Tailwind CSS v4", 
-        "Responsive Web Design"
-      ]
-    },
-    {
-      title: "Backend & Systems",
-      icon: <FaDatabase className="text-emerald-400" />,
-      skills: [
-        "Firebase Firestore & Auth", 
-        "RESTful APIs & Axios", 
-        "Cloudinary SDK", 
+        "Responsive & Accessible UI",
         "Redux Toolkit / Context API"
       ]
     },
     {
-      title: "Environment & Tools",
+      title: "Backend & Databases",
+      icon: <FaDatabase className="text-emerald-400" />,
+      skills: [
+        "Node.js & Express.js",
+        "MongoDB & Mongoose",
+        "Firebase Firestore & Auth", 
+        "RESTful APIs & Axios", 
+        "Cloudinary (Media Management)"
+      ]
+    },
+    {
+      title: "DevOps & Tooling",
       icon: <FaWrench className="text-amber-400" />,
       skills: [
-        "Git & GitHub", 
-        "Framer Motion, GSAP & AOS", 
-        "Vite, NPM & Node.js", 
-        "Vercel & Chrome DevTools"
+        "Render & Vercel Deployment",
+        "Git & GitHub Version Control", 
+        "Framer Motion & Animations", 
+        "Vite, NPM & Build Tools", 
+        "Postman & Chrome DevTools"
       ]
     }
   ];
@@ -141,16 +144,16 @@ function About() {
                 <div className="space-y-1">
                   <p><span className="text-emerald-400">const</span> developer = <span className="text-purple-400">{"{"}</span></p>
                   <p className="pl-4">name: <span className="text-teal-300">"Jerry"</span>,</p>
-                  <p className="pl-4">role: <span className="text-teal-300">"Frontend Architect"</span>,</p>
+                  <p className="pl-4">role: <span className="text-teal-300">"Full-Stack Engineer"</span>,</p>
                   <p className="pl-4">experience: <span className="text-amber-400">"4+ Years"</span>,</p>
-                  <p className="pl-4">focus: <span className="text-teal-300">"Clean UI, Scaling SaaS products"</span>,</p>
+                  <p className="pl-4">focus: <span className="text-teal-300">"Full-Stack Architecture & Scalable Systems"</span>,</p>
                   <p className="pl-4">
                     stack: <span className="text-purple-300">[</span>
-                    <span className="text-teal-300">"React"</span>, <span className="text-teal-300">"Next.js"</span>, <span className="text-teal-300">"TypeScript"</span>, <span className="text-teal-300">"Tailwind"</span>
+                    <span className="text-teal-300">"React"</span>, <span className="text-teal-300">"Next.js"</span>, <span className="text-teal-300">"Node.js"</span>, <span className="text-teal-300">"Express"</span>, <span className="text-teal-300">"MongoDB"</span>, <span className="text-teal-300">"Firebase"</span>
                     <span className="text-purple-300">]</span>,
                   </p>
-                  <p className="pl-4">motivation: <span className="text-teal-300">"Building real-world usability"</span>,</p>
-                  <p className="pl-4">status: <span className="text-teal-300">"Building interactive design systems"</span></p>
+                  <p className="pl-4">motivation: <span className="text-teal-300">"Building real-world usability & scalable systems"</span>,</p>
+                  <p className="pl-4">status: <span className="text-teal-300">"Shipping robust full-stack applications"</span></p>
                   <p><span className="text-purple-400">{"}"}</span>;</p>
                 </div>
                 <p className="pt-2 text-gray-500">// Output stats log</p>
@@ -171,11 +174,11 @@ function About() {
             </motion.h2>
 
             <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-              I’m Jerry, a frontend developer and UI/UX focused engineer. I specialize in turning complex product flows into fluid, easy-to-use, and pixel-perfect applications. My toolbox revolves around React, Firebase database architecture, and cutting edge CSS styling patterns.
+              I’m Jerry, a full-stack developer and UI/UX focused engineer. I specialize in turning complex product flows into fluid, robust, and scalable end-to-end applications. My toolbox revolves around React, Next.js, Node.js, Express, MongoDB, Firebase, and cutting-edge styling patterns.
             </motion.p>
 
             <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
-              My engineering philosophy revolves around accessibility, visual delight, and clean code optimization. I believe the best applications are those that bridge beautiful layout interactions with high-fidelity performance.
+              My engineering philosophy revolves around accessibility, visual delight, resilient backend architecture, and clean code optimization. I believe the best applications are those that bridge beautiful layout interactions with high-fidelity performance and reliable data handling.
             </motion.p>
 
             {/* Premium Stat Counter Dashboard Grid */}
@@ -245,10 +248,10 @@ function About() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">What I Focus On</h2>
             <div className="grid md:grid-cols-2 gap-8 text-gray-600 dark:text-gray-400 font-light leading-relaxed">
               <p>
-                I build real-world web applications that are highly functional, scalable, and responsive. From dashboard consoles and data trackers to simple business sites, my goal is to create products that solve specific problems and make workflows easier.
+                I build real-world web applications that are highly functional, scalable, and responsive. From dashboard consoles and data trackers to dynamic web platforms, my goal is to create products that solve specific problems and make workflows easier.
               </p>
               <p>
-                I am currently scaling my full-stack capabilities, digging deeper into Node.js backend infrastructure, advanced PostgreSQL/SQL architectures, and Cloud database structures while continuing to sharpen my frontend craft.
+                As a versatile full-stack engineer, I architect complete web solutions: structuring modular Node.js & Express backends, modeling data with MongoDB and Firebase, integrating Cloudinary asset pipelines, and crafting intuitive, accessible client interfaces.
               </p>
             </div>
           </motion.div>

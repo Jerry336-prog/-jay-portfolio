@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import TextType from "../Text_animation.jsx";
-import { FaGithub, FaTwitter, FaLinkedin, FaBriefcase, FaCode, FaLightbulb } from "react-icons/fa";
+import { FaGithub, FaTwitter, FaLinkedin, FaBriefcase, FaCode, FaLightbulb, FaServer } from "react-icons/fa";
 import Button from "../Components/Button";
 
 const Home = () => {
@@ -23,10 +23,15 @@ const Home = () => {
 
   const techStack = [
     { name: "React", color: "from-sky-400 to-blue-500" },
+    { name: "Next.js", color: "from-slate-700 to-zinc-900" },
+    { name: "Node.js", color: "from-emerald-500 to-green-600" },
+    { name: "Express", color: "from-gray-500 to-slate-700" },
+    { name: "MongoDB", color: "from-emerald-600 to-green-700" },
     { name: "Firebase", color: "from-amber-400 to-orange-500" },
-    { name: "JavaScript", color: "from-yellow-400 to-amber-500" },
+    { name: "Cloudinary", color: "from-blue-500 to-indigo-600" },
+    { name: "Render", color: "from-teal-500 to-cyan-600" },
     { name: "Tailwind CSS", color: "from-teal-400 to-emerald-500" },
-    { name: "HTML5/CSS3", color: "from-orange-400 to-rose-500" },
+    { name: "JavaScript", color: "from-yellow-400 to-amber-500" },
   ];
 
   return (
@@ -68,8 +73,9 @@ const Home = () => {
               >
                 <TextType
                   text={[
-                    "Frontend Developer",
-                    "React Specialist",
+                    "Full-Stack Developer",
+                    "Full-Stack Engineer",
+                    "React & Node.js Specialist",
                     "UI/UX Focused",
                   ]}
                   typingSpeed={70}
@@ -86,7 +92,7 @@ const Home = () => {
               variants={itemVariants} 
               className="max-w-xl text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400 font-light"
             >
-              I build clean, scalable and user-friendly web applications, combining cutting-edge engineering with thoughtful visual aesthetics.
+              I build clean, scalable and user-friendly full-stack web applications, combining robust backend architecture with thoughtful visual aesthetics.
             </motion.p>
 
             {/* Resume CTA */}
@@ -179,19 +185,19 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Frontend Development",
-                desc: "Building responsive, blazing fast, and pixel-perfect web apps using React, Tailwind CSS v4, and modern standards.",
+                title: "Full-Stack Web Apps",
+                desc: "Building scalable, responsive, and robust applications with React, Next.js, Node.js, Express, and MongoDB.",
                 icon: <FaCode className="w-6 h-6 text-emerald-500" />
               },
               {
-                title: "UI/UX Architecture",
-                desc: "Designing highly polished interfaces with micro-interactions, responsive grids, dark modes, and flawless spacing.",
-                icon: <FaLightbulb className="w-6 h-6 text-emerald-500" />
+                title: "Backend & Cloud Systems",
+                desc: "Architecting secure REST APIs, MongoDB schemas, Firebase authentication, Cloudinary media pipelines, and Render deployments.",
+                icon: <FaServer className="w-6 h-6 text-emerald-500" />
               },
               {
-                title: "Real-world SaaS",
-                desc: "Creating business-ready integrations like Cloudinary image management, Firestore database nodes, and safe auth portals.",
-                icon: <FaBriefcase className="w-6 h-6 text-emerald-500" />
+                title: "UI/UX & Design Systems",
+                desc: "Designing highly polished interfaces with micro-interactions, responsive grids, dark modes, and modern Tailwind CSS.",
+                icon: <FaLightbulb className="w-6 h-6 text-emerald-500" />
               },
             ].map((item, i) => (
               <motion.div
