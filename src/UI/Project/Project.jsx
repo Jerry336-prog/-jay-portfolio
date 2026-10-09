@@ -32,24 +32,55 @@ function Project() {
     fetchProjects();
   }, []);
 
-  const filterTabs = ["All", "Featured", "Full-Stack", "React", "Node.js", "Firebase", "Tailwind"];
+  const filterTabs = ["All", "Featured", "Frontend", "Full-Stack", "React", "Node.js", "Firebase", "Tailwind"];
 
   // Filter and search logic
   const filteredProjects = projects.filter((project) => {
     const stackList = Array.isArray(project.stack) ? project.stack : [];
+    const projectCategory = (project.category || project.projectType || "").toLowerCase().trim();
+    const projectStatus = (project.status || "").toLowerCase().trim();
+
     const matchesSearch =
       project.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (project.category && project.category.toLowerCase().includes(searchQuery.toLowerCase())) ||
       stackList.some((tech) =>
         tech.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
-    const matchesCategory =
-      activeFilter === "All" ||
-      (activeFilter === "Featured" && project.featured) ||
-      stackList.some(
+    let matchesCategory = false;
+
+    if (activeFilter === "All") {
+      matchesCategory = true;
+    } else if (activeFilter === "Featured") {
+      matchesCategory = Boolean(project.featured);
+    } else if (activeFilter === "Frontend") {
+      const isFullStack =
+        projectCategory.includes("full") ||
+        projectStatus.includes("full") ||
+        stackList.some((tech) => {
+          const t = tech.toLowerCase().trim();
+          return t === "full-stack" || t === "fullstack" || t === "full stack";
+        });
+
+      matchesCategory =
+        projectCategory === "frontend" ||
+        projectStatus === "frontend" ||
+        stackList.some((tech) => tech.toLowerCase().trim() === "frontend") ||
+        (!projectCategory && !isFullStack);
+    } else if (activeFilter === "Full-Stack") {
+      matchesCategory =
+        projectCategory.includes("full") ||
+        projectStatus.includes("full") ||
+        stackList.some((tech) => {
+          const t = tech.toLowerCase().trim();
+          return t === "full-stack" || t === "fullstack" || t === "full stack";
+        });
+    } else {
+      matchesCategory = stackList.some(
         (tech) => tech.toLowerCase().trim() === activeFilter.toLowerCase().trim()
       );
+    }
 
     return matchesSearch && matchesCategory;
   });
@@ -164,22 +195,51 @@ function Project() {
                   <div className="p-6 flex flex-col flex-grow bg-transparent">
                     {/* Header line */}
                     <div className="flex items-center justify-between gap-4 mb-3">
-                      <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
+                      <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors flex-1">
                         {project.title}
                       </h2>
 
-                      {/* Project status badge */}
-                      <span
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
-                          project.status === "Live"
-                            ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
-                            : project.status === "In Progress"
-                            ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
-                            : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
-                        }`}
-                      >
-                        {project.status || "Completed"}
-                      </span>
+                      {/* Project badges */}
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        {(() => {
+                          const cat =
+                            project.category ||
+                            project.projectType ||
+                            (Array.isArray(project.stack) &&
+                            project.stack.some(
+                              (s) =>
+                                s.toLowerCase().includes("full-stack") ||
+                                s.toLowerCase().includes("fullstack")
+                            )
+                              ? "Full-Stack"
+                              : "Frontend");
+                          const isFull = cat.toLowerCase().includes("full");
+                          return (
+                            <span
+                              className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                                isFull
+                                  ? "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
+                                  : "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20"
+                              }`}
+                            >
+                              {cat}
+                            </span>
+                          );
+                        })()}
+
+                        {/* Project status badge */}
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                            project.status === "Live"
+                              ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
+                              : project.status === "In Progress"
+                              ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
+                              : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20"
+                          }`}
+                        >
+                          {project.status || "Completed"}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Description */}
@@ -189,7 +249,7 @@ function Project() {
 
                     {/* Stack tags */}
                     <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.stack.map((tech, i) => (
+                      {Array.isArray(project.stack) && project.stack.map((tech, i) => (
                         <span
                           key={i}
                           className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-gray-600 dark:text-gray-300"

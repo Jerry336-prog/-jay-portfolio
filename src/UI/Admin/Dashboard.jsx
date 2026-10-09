@@ -5,7 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
-import { FaPlus, FaFolderOpen, FaRegEdit, FaTrashAlt, FaCloudUploadAlt, FaSignOutAlt, FaStar, FaGlobe, FaCogs } from "react-icons/fa";
+import { FaPlus, FaFolderOpen, FaRegEdit, FaTrashAlt, FaCloudUploadAlt, FaSignOutAlt, FaStar, FaGlobe, FaCogs, FaLaptopCode, FaLayerGroup } from "react-icons/fa";
 import Button from "../Components/Button";
 import Toast from "../Components/Toast";
 
@@ -15,6 +15,7 @@ function Dashboard() {
   const [imageUrl, setImageUrl] = useState("");
   const [link, setLink] = useState("");
   const [status, setStatus] = useState("");
+  const [category, setCategory] = useState("Frontend");
   const [stack, setStack] = useState("");
   const [projects, setProjects] = useState([]);
   const [editingProject, setEditingProject] = useState(null);
@@ -123,12 +124,24 @@ function Dashboard() {
 
   const handleEdit = (project) => {
     setEditingProject(project);
-    setTitle(project.title);
-    setDescription(project.description);
-    setImageUrl(project.imageUrl);
-    setLink(project.link);
-    setStatus(project.status);
-    setStack(project.stack.join(","));
+    setTitle(project.title || "");
+    setDescription(project.description || "");
+    setImageUrl(project.imageUrl || "");
+    setLink(project.link || "");
+    setStatus(project.status || "");
+    const initialCategory =
+      project.category ||
+      project.projectType ||
+      (Array.isArray(project.stack) &&
+      project.stack.some(
+        (s) =>
+          s.toLowerCase().includes("full-stack") ||
+          s.toLowerCase().includes("fullstack")
+      )
+        ? "Full-Stack"
+        : "Frontend");
+    setCategory(initialCategory);
+    setStack(Array.isArray(project.stack) ? project.stack.join(",") : (project.stack || ""));
     setFeatured(project.featured || false);
   };
 
@@ -154,6 +167,8 @@ function Dashboard() {
           imageUrl: uploadedImageUrl,
           link,
           status,
+          category,
+          projectType: category,
           stack: formattedStack,
           featured,
         });
@@ -166,6 +181,8 @@ function Dashboard() {
           imageUrl: uploadedImageUrl,
           link,
           status,
+          category,
+          projectType: category,
           stack: formattedStack,
           featured,
           createdAt: new Date(),
@@ -180,6 +197,7 @@ function Dashboard() {
       setImageUrl("");
       setLink("");
       setStatus("");
+      setCategory("Frontend");
       setStack("");
       setFeatured(false);
       setImageFile(null);
@@ -274,6 +292,7 @@ function Dashboard() {
                       setImageUrl("");
                       setLink("");
                       setStatus("");
+                      setCategory("Frontend");
                       setStack("");
                       setFeatured(false);
                       setImageFile(null);
@@ -358,6 +377,39 @@ function Dashboard() {
                   </select>
                 </div>
 
+                {/* Project Category / Architecture Status (Frontend or Full-Stack) */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    Project Status / Category
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCategory("Frontend")}
+                      className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border ${
+                        category === "Frontend"
+                          ? "bg-sky-500/20 text-sky-600 dark:text-sky-400 border-sky-500/40 shadow-sm"
+                          : "glass-panel border-black/10 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                      }`}
+                    >
+                      <FaLaptopCode size={13} />
+                      <span>Frontend</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCategory("Full-Stack")}
+                      className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border ${
+                        category === "Full-Stack"
+                          ? "bg-teal-500/20 text-teal-600 dark:text-teal-400 border-teal-500/40 shadow-sm"
+                          : "glass-panel border-black/10 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                      }`}
+                    >
+                      <FaLayerGroup size={13} />
+                      <span>Full-Stack</span>
+                    </button>
+                  </div>
+                </div>
+
                 {/* Featured project toggle */}
                 <div className="flex items-center justify-between py-2 border-b border-black/5 dark:border-white/5">
                   <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Featured Placement</label>
@@ -432,15 +484,42 @@ function Dashboard() {
                         <h3 className="font-bold text-gray-900 dark:text-white truncate">
                           {project.title}
                         </h3>
-                        <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                          project.status === "Live"
-                            ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                            : project.status === "In Progress"
-                            ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                            : "bg-blue-500/10 text-blue-600 dark:text-blue-400"
-                        }`}>
-                          {project.status}
-                        </span>
+                        <div className="flex items-center gap-1.5 flex-shrink-0">
+                          {(() => {
+                            const cat =
+                              project.category ||
+                              project.projectType ||
+                              (Array.isArray(project.stack) &&
+                              project.stack.some(
+                                (s) =>
+                                  s.toLowerCase().includes("full-stack") ||
+                                  s.toLowerCase().includes("fullstack")
+                              )
+                                ? "Full-Stack"
+                                : "Frontend");
+                            const isFull = cat.toLowerCase().includes("full");
+                            return (
+                              <span
+                                className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                                  isFull
+                                    ? "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20"
+                                    : "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20"
+                                }`}
+                              >
+                                {cat}
+                              </span>
+                            );
+                          })()}
+                          <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                            project.status === "Live"
+                              ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                              : project.status === "In Progress"
+                              ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                              : "bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                          }`}>
+                            {project.status}
+                          </span>
+                        </div>
                       </div>
 
                       <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed">
