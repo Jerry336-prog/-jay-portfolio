@@ -48,6 +48,20 @@ function Project() {
         tech.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
+    const isFullStack =
+      projectCategory.includes("full") ||
+      projectStatus.includes("full") ||
+      stackList.some((tech) => {
+        const t = tech.toLowerCase().trim();
+        return t === "full-stack" || t === "fullstack" || t === "full stack";
+      });
+
+    const isFrontend =
+      projectCategory === "frontend" ||
+      projectStatus === "frontend" ||
+      stackList.some((tech) => tech.toLowerCase().trim() === "frontend") ||
+      (!projectCategory && !isFullStack);
+
     let matchesCategory = false;
 
     if (activeFilter === "All") {
@@ -55,27 +69,11 @@ function Project() {
     } else if (activeFilter === "Featured") {
       matchesCategory = Boolean(project.featured);
     } else if (activeFilter === "Frontend") {
-      const isFullStack =
-        projectCategory.includes("full") ||
-        projectStatus.includes("full") ||
-        stackList.some((tech) => {
-          const t = tech.toLowerCase().trim();
-          return t === "full-stack" || t === "fullstack" || t === "full stack";
-        });
-
-      matchesCategory =
-        projectCategory === "frontend" ||
-        projectStatus === "frontend" ||
-        stackList.some((tech) => tech.toLowerCase().trim() === "frontend") ||
-        (!projectCategory && !isFullStack);
+      // Both Frontend and Full-Stack projects appear under the Frontend filter
+      matchesCategory = isFrontend || isFullStack;
     } else if (activeFilter === "Full-Stack") {
-      matchesCategory =
-        projectCategory.includes("full") ||
-        projectStatus.includes("full") ||
-        stackList.some((tech) => {
-          const t = tech.toLowerCase().trim();
-          return t === "full-stack" || t === "fullstack" || t === "full stack";
-        });
+      // Pure Frontend projects are excluded from the Full-Stack filter
+      matchesCategory = isFullStack && projectCategory !== "frontend";
     } else {
       matchesCategory = stackList.some(
         (tech) => tech.toLowerCase().trim() === activeFilter.toLowerCase().trim()
