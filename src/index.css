@@ -151,3 +151,74 @@ body.dark .glass-navbar {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Emerald trace: a small signature between the site's glass surfaces. */
+.route-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+}
+.route-shutter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(50% + 1px);
+  transform: scaleY(0);
+  background-color: var(--bg-secondary);
+  background-image: radial-gradient(ellipse at 50% 100%, var(--accent-glow), transparent 65%),
+    linear-gradient(var(--glass-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+  background-size: 100% 100%, 64px 64px, 64px 64px;
+  will-change: transform;
+}
+.route-shutter-top { top: 0; transform-origin: top; }
+.route-shutter-bottom {
+  bottom: 0;
+  transform-origin: bottom;
+  background-image: radial-gradient(ellipse at 50% 0%, var(--accent-glow), transparent 65%),
+    linear-gradient(var(--glass-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+}
+.route-signal {
+  position: relative;
+  width: min(480px, calc(100vw - 64px));
+  opacity: 0;
+  color: var(--text-primary);
+}
+.route-caption {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary-2);
+}
+.route-title {
+  margin: 20px 0 24px;
+  font-size: clamp(40px, 8vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+}
+.route-title span { color: var(--accent); }
+.route-chart { width: 100%; overflow: visible; }
+.route-trace-track { stroke: var(--glass-border); stroke-width: 2; }
+.route-trace {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.route-caption-bottom { margin-top: 24px; font-size: 9px; }
+@media (prefers-reduced-motion: reduce) {
+  .route-shutter { transform: none !important; will-change: auto; }
+  .route-signal { opacity: 1 !important; transform: none !important; }
+  .route-trace { stroke-dashoffset: 0; }
+}

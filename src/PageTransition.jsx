@@ -1,31 +1,5 @@
-import React, { useEffect, useState } from "react";
-import PageLoader from "./PageLoader";
-
-function PageTransition({ children }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 600); // matches fade duration
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <>
-      <PageLoader isVisible={loading} />
-
-      <div
-        className={`
-          transition-opacity duration-500 ease-in-out
-          ${loading ? "opacity-0" : "opacity-100"}
-        `}
-      >
-        {children}
-      </div>
-    </>
-  );
+// Public navigation is coordinated once, above Routes, by RouteTransition.
+// Keep page wrappers lightweight so page content never waits on a fake loader.
+export default function PageTransition({ children }) {
+  return children;
 }
-
-export default PageTransition;

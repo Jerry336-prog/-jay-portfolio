@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RouteTransition from "./RouteTransition";
 import Header from "./constant/Header";
 import Footer from "./constant/Footer";
 import HomePage from "./UI/Home/Home_page";
@@ -16,7 +17,8 @@ function App() {
   return (
     <BrowserRouter>
       
-      <Routes>
+      <RouteTransition>{(displayLocation) => (
+      <Routes location={displayLocation}>
         <Route path="/" element={
           <>
           <Header />
@@ -64,6 +66,7 @@ function App() {
                  </ProtectedRoute>  
               } />
       </Routes>
+      )}</RouteTransition>
 
       
     </BrowserRouter>

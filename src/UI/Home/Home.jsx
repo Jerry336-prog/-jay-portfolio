@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import TextType from "../Text_animation.jsx";
 import { FaGithub, FaTwitter, FaLinkedin, FaBriefcase, FaCode, FaLightbulb, FaServer } from "react-icons/fa";
@@ -102,11 +103,11 @@ const Home = () => {
                   Download Resume
                 </Button>
               </a>
-              <a href="/projects" className="no-underline">
+              <Link to="/projects" className="no-underline">
                 <Button variant="secondary" className="px-8 py-3.5">
                   Explore Projects
                 </Button>
-              </a>
+              </Link>
             </motion.div>
 
             {/* Tech Chips */}
@@ -242,11 +243,11 @@ const Home = () => {
                 Let's construct something beautiful, functional, and performant. Explore my projects or send a message.
               </p>
               <div className="flex flex-wrap justify-center gap-4 pt-4">
-                <a href="/contact" className="no-underline">
+                <Link to="/contact" className="no-underline">
                   <Button variant="primary" className="px-8 py-3.5 shadow-lg shadow-emerald-500/20">
                     Get In Touch
                   </Button>
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
